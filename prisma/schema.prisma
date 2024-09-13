@@ -13,8 +13,8 @@ model User {
   email    String @unique
   password String
 
-  checkouts Checkout[]
-  payables  Transaction[]
+  checkouts    Checkout[]
+  transactions Transaction[]
 }
 
 model Checkout {
@@ -27,9 +27,9 @@ model Checkout {
   cvv            String   @db.VarChar(4)
   createdAt      DateTime @default(now())
 
-  userId   String        @db.Uuid
-  user     User          @relation(fields: [userId], references: [id])
-  payables Transaction[]
+  userId       String        @db.Uuid
+  user         User          @relation(fields: [userId], references: [id])
+  transactions Transaction[]
 }
 
 model Transaction {
