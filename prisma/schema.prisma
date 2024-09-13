@@ -1,0 +1,52 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id       String @id @default(uuid()) @db.Uuid
+  name     String
+  email    String @unique
+  password String
+
+  checkouts Checkout[]
+  payables  Transaction[]
+}
+
+model Checkout {
+  id             String   @id @default(uuid()) @db.Uuid
+  amount         Float
+  description    String
+  cardNumber     String   @db.VarChar(16)
+  cardHolderName String
+  expirationDate String
+  cvv            String   @db.VarChar(4)
+  createdAt      DateTime @default(now())
+
+  userId   String        @db.Uuid
+  user     User          @relation(fields: [userId], references: [id])
+  payables Transaction[]
+}
+
+model Transaction {
+  id          String            @id @default(uuid()) @db.Uuid
+  amount      Float
+  status      TransactionStatus
+  paymentDate DateTime
+  createdAt   DateTime          @default(now())
+
+  checkoutId String   @db.Uuid
+  checkout   Checkout @relation(fields: [checkoutId], references: [id])
+
+  userId String @db.Uuid
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+enum TransactionStatus {
+  PENDING
+  PAID
+}
