@@ -35,7 +35,7 @@ export class UserService {
       where: { id },
       include: {
         checkouts: true,
-        payables: true,
+        transactions: true,
       },
     });
   }
