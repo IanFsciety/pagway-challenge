@@ -34,7 +34,6 @@ export class TransactionService {
       },
       include: {
         checkout: true,
-        user: true,
       },
     });
   }
@@ -44,7 +43,6 @@ export class TransactionService {
       where: { id },
       include: {
         checkout: true,
-        user: true,
       },
     });
   }
