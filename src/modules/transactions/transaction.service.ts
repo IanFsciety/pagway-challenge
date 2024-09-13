@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 
 import { PrismaService } from '../../prisma/prisma.service';
 import { CreateTransactionDto } from './dto/create-transaction-dto';
@@ -49,7 +49,20 @@ export class TransactionService {
     });
   }
 
-  updateTransaction(id: string, updateTransactionDto: UpdateTransactionDto) {
+  async updateTransaction(
+    id: string,
+    updateTransactionDto: UpdateTransactionDto,
+  ) {
+    const transaction = await this.prisma.transaction.findUnique({
+      where: { id },
+    });
+
+    if (transaction.status === 'PAID') {
+      throw new BadRequestException(
+        'Cannot update a transaction that is already PAID.',
+      );
+    }
+
     return this.prisma.transaction.update({
       where: {
         id,
