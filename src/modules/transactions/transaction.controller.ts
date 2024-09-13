@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 
-import { TransactionStatus } from '@prisma/client';
 import { CreateTransactionDto } from './dto/create-transaction-dto';
+import { UpdateTransactionDto } from './dto/update-transaction-dto';
 import { TransactionService } from './transaction.service';
 
 @Controller('transactions')
@@ -23,10 +23,10 @@ export class TransactionController {
     return this.transactionService.findOne(id);
   }
 
-  @Patch(':id')
+  @Patch('/t/:id')
   updateTransaction(
     @Param('id') id: string,
-    @Body() updateTransactionDto: TransactionStatus,
+    @Body() updateTransactionDto: UpdateTransactionDto,
   ) {
     return this.transactionService.updateTransaction(id, updateTransactionDto);
   }
