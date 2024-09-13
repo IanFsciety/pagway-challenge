@@ -34,8 +34,9 @@ método post para localhost:porta/users/ criará um novo usuário.
 método get para localhost:porta/users/iddousuario listará as informações do usuário.
 
 método post para localhost:porta/transactions/ criará uma nova transação para o id usuário.
+método patch para localhost:porta/transactions/t/iddatransacao edita o status da transação solicitada.
 método get para localhost:porta/transactions/iddousuario listará todas transações do usuário.
-método get para localhost:porta/transactions/iddatransacao listará a transação solicitada.
+método get para localhost:porta/transactions/t/iddatransacao listará a transação solicitada.
 
 método post para localhost:porta/checkouts/ criará um novo checkout para o id do usuário.
 método get para localhost:porta/checkouts/iddousuario listará todos os checkouts do usuário.
