@@ -27,6 +27,9 @@ Após ligar o banco, para iniciar o servidos excute:
 yarn start:dev ou yarn start:prod
 ```
 Rotas
+
+```shell
+
 método post para localhost:porta/users/ criará um novo usuário.
 método get para localhost:porta/users/iddousuario listará as informações do usuário.
 
@@ -39,3 +42,7 @@ método get para localhost:porta/checkouts/iddousuario listará todos os checkou
 método get para localhost:porta/checkouts/iddocheckout listará o checkout solicitado.
 
 método get para localhost:porta/users/balance listará as informações dos saldo disponível para saque e o saldo projetado do  usuário.
+
+```
+
+
