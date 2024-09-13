@@ -33,13 +33,13 @@ export class CheckoutService {
     });
   }
 
-  findAllByUserId(userId) {
+  findAllByUserId(userId: string) {
     return this.prisma.checkout.findMany({
       where: {
         userId: userId,
       },
       include: {
-        payables: true,
+        transactions: true,
       },
     });
   }
@@ -48,7 +48,7 @@ export class CheckoutService {
     return this.prisma.checkout.findUnique({
       where: { id },
       include: {
-        payables: true,
+        transactions: true,
       },
     });
   }

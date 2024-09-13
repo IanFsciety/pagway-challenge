@@ -16,7 +16,7 @@ export class CheckoutController {
     return this.checkoutService.findAllByUserId(userId);
   }
 
-  @Get(':id')
+  @Get('c/:id')
   findOne(@Param('id') id: string) {
     return this.checkoutService.findOne(id);
   }
