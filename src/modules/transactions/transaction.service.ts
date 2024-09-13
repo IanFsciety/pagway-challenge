@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 import { PrismaService } from '../../prisma/prisma.service';
 import { CreateTransactionDto } from './dto/create-transaction-dto';
+import { UpdateTransactionDto } from './dto/update-transaction-dto';
 
 @Injectable()
 export class TransactionService {
@@ -44,6 +45,17 @@ export class TransactionService {
       include: {
         checkout: true,
         user: true,
+      },
+    });
+  }
+
+  updateTransaction(id: string, updateTransactionDto: UpdateTransactionDto) {
+    return this.prisma.transaction.update({
+      where: {
+        id,
+      },
+      data: {
+        status: updateTransactionDto.status,
       },
     });
   }
