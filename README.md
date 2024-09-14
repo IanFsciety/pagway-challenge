@@ -40,7 +40,7 @@ método get para localhost:porta/transactions/t/iddatransacao listará a transa�
 
 método post para localhost:porta/checkouts/ criará um novo checkout para o id do usuário.
 método get para localhost:porta/checkouts/iddousuario listará todos os checkouts do usuário.
-método get para localhost:porta/checkouts/iddocheckout listará o checkout solicitado.
+método get para localhost:porta/checkouts/c/iddocheckout listará o checkout solicitado.
 
 método get para localhost:porta/users/balance listará as informações dos saldo disponível para saque e o saldo projetado do  usuário.
 
