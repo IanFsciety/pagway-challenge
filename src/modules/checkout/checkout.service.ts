@@ -29,6 +29,7 @@ export class CheckoutService {
         expirationDate,
         cvv,
         userId,
+        createdAt: new Date().toLocaleString(),
       },
     });
   }
