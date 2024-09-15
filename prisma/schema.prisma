@@ -18,14 +18,14 @@ model User {
 }
 
 model Checkout {
-  id             String   @id @default(uuid()) @db.Uuid
+  id             String @id @default(uuid()) @db.Uuid
   amount         Float
   description    String
-  cardNumber     String   @db.VarChar(16)
+  cardNumber     String @db.VarChar(16)
   cardHolderName String
   expirationDate String
-  cvv            String   @db.VarChar(4)
-  createdAt      DateTime @default(now())
+  cvv            String @db.VarChar(4)
+  createdAt      String
 
   userId       String        @db.Uuid
   user         User          @relation(fields: [userId], references: [id])
@@ -36,8 +36,8 @@ model Transaction {
   id          String            @id @default(uuid()) @db.Uuid
   amount      Float
   status      TransactionStatus
-  paymentDate DateTime
-  createdAt   DateTime          @default(now())
+  paymentDate String
+  createdAt   String
 
   checkoutId String   @db.Uuid
   checkout   Checkout @relation(fields: [checkoutId], references: [id])
