@@ -40,6 +40,16 @@ export class UserService {
     });
   }
 
+  getAll() {
+    return this.prisma.user.findMany({
+      select: {
+        name: true,
+        email: true,
+        id: true,
+      },
+    });
+  }
+
   async getBalances(
     userId: string,
   ): Promise<{ availableBalance: number; projectedBalance: number }> {

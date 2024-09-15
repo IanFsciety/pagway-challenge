@@ -1,13 +1,15 @@
 import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 
+import { Cron } from '@nestjs/schedule';
+import { Throttle } from '@nestjs/throttler';
 import { CreateTransactionDto } from './dto/create-transaction-dto';
-import { UpdateTransactionDto } from './dto/update-transaction-dto';
 import { TransactionService } from './transaction.service';
 
 @Controller('transactions')
 export class TransactionController {
   constructor(private readonly transactionService: TransactionService) {}
 
+  @Throttle({ default: { limit: 1, ttl: 10000 } })
   @Post()
   async createTransaction(@Body() createTransactionDto: CreateTransactionDto) {
     return this.transactionService.createTransaction(createTransactionDto);
@@ -23,11 +25,14 @@ export class TransactionController {
     return this.transactionService.findOne(id);
   }
 
-  @Patch('/t/:id')
-  updateTransaction(
-    @Param('id') id: string,
-    @Body() updateTransactionDto: UpdateTransactionDto,
-  ) {
-    return this.transactionService.updateTransaction(id, updateTransactionDto);
+  @Get()
+  findAll() {
+    return this.transactionService.findAll();
+  }
+
+  @Cron('0 0 * * *')
+  @Patch()
+  async updateTransaction() {
+    return this.transactionService.updateTransaction();
   }
 }

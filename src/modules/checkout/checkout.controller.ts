@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Throttle } from '@nestjs/throttler';
 import { CheckoutService } from './checkout.service';
 import { CreateCheckoutDto } from './dto/create-checkout.dto';
 
@@ -6,6 +7,7 @@ import { CreateCheckoutDto } from './dto/create-checkout.dto';
 export class CheckoutController {
   constructor(private readonly checkoutService: CheckoutService) {}
 
+  @Throttle({ default: { limit: 1, ttl: 10000 } })
   @Post()
   async createCheckout(@Body() checkoutService: CreateCheckoutDto) {
     return this.checkoutService.createCheckout(checkoutService);

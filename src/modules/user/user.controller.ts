@@ -16,6 +16,11 @@ export class UserController {
     return this.userService.getUserById(id);
   }
 
+  @Get()
+  getAll() {
+    return this.userService.getAll();
+  }
+
   @Get('/balance/:id')
   getBalances(@Param('id') userId: string) {
     return this.userService.getBalances(userId);

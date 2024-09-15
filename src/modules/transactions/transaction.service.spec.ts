@@ -24,7 +24,7 @@ describe('TransactionService', () => {
     const createTransacionDto = {
       amount: 100.0,
       status: TransactionStatus.PENDING,
-      paymentDate: new Date().toISOString(),
+      paymentDate: new Date().toLocaleString(),
       checkoutId: '9c1b6744-299c-4d83-bcb5-17a64701775e',
       userId: '20d9987c-6999-4795-94f6-db6a74620038',
     };
